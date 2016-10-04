@@ -1,0 +1,5 @@
+﻿{
+   "$schema": "/fable-config-schema.json#",
+   "module": "amd",
+   "sourceMaps": "inline"
+}

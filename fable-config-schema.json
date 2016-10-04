@@ -1,0 +1,83 @@
+﻿{
+   "id": "http://some.site.somewhere/entry-schema#",
+   "$schema": "http://json-schema.org/draft-04/schema#",
+   "description": "Fable Configuration File Schema",
+   "type": "object",
+   //"required": [  ],
+   "properties": {
+      "$schema": { "type": "string" },
+      "projFile": { "$ref": "#/definitions/projfile"},
+      "sourceMaps": { "$ref": "#/definitions/sourcemap" },
+      "module": { "$ref": "#/definitions/module" },
+      "ecma": { "$ref": "#/definitions/ecma" },
+      "declaration": { "$ref": "#/definitions/declaration" },
+      "plugins": { "$ref": "#/definitions/plugins" },
+      "refs": { "$ref": "#/definitions/refs" },
+      "targets": { "$ref": "#/definitions/targets" }
+   },
+   "additionalProperties": false,
+   "definitions": {
+      "projfile": {
+         "type": "string",
+         "description": "Path to fsproj. Relative to fableconfig.json"
+      },
+      "sourcemap": {
+         "description": "Generate sourcemaps: false | true | inline",
+         "oneOf": [
+            { "type": "boolean" },
+            { "enum": [ "inline" ] }
+         ],
+         "default":  false
+      },
+      "module": {
+         "enum": [ "commonjs", "amd", "umd", "es2015" ],
+         "description": "JavaScript module output format: commonjs | amd | umd | es2015",
+         "default": "commonjs"
+      },
+      "ecma": {
+         "enum": [ "es5", "es2015" ],
+         "description": "Specify ECMAScript target version: es5 | es2015",
+         "default": "es5"
+      },
+      "symbols": {
+         "description": "F# symbols for conditional compilation, like DEBUG. FABLE_COMPILER is predefined."
+      },
+      "plugins": {
+         "type": "string",
+         "description": "Paths to Fable plugins"
+      },
+      "refs": {
+         "type": "object",
+         "description": "DLL or project references \"AssemblyName\" : \"../../ImportPath\"",
+         "patternProperties": {
+            "^((\\w|-)+)$": {
+               "type": "string"
+            }
+         },
+         "additionalProperties": false
+      },
+      "declaration": {
+         "type": "boolean",
+         "description": "[Experimental] Generates corresponding ‘.d.ts’ file",
+         "default": false
+      },
+      "target": {
+         "type": "object",
+         //"required": [  ],
+         "properties": {
+            "sourceMaps": { "$ref": "#/definitions/sourcemap" },
+            "module": { "$ref": "#/definitions/module" },
+            "ecma": { "$ref": "#/definitions/ecma" },
+            "declaration": { "$ref": "#/definitions/declaration" }
+         },
+         "additionalProperties": false
+      },
+      "targets": {
+         "type": "object",
+         "patternProperties": { "^((\\w|-)+)$": { "$ref": "#/definitions/target" } },
+         "description": "Configuration by target. Use --target to select a configuration",
+         "additionalProperties": false
+      }
+   }
+}
+
