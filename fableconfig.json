@@ -1,16 +1,36 @@
 ﻿{
-   //"$schema": "/fable-config-schema.json#", // local testing use local schema
+   "$schema": "/fable-config-schema.json#", // local testing use local schema
    // or use from published site.
    // next step: get it added officially to http://json.schemastore.org/fableconfig ?
-   "$schema": "https://raw.githubusercontent.com/michaelsg/fable-config-schema/master/fable-config-schema.json#",
+   //"$schema": "https://raw.githubusercontent.com/michaelsg/fable-config-schema/master/fable-config-schema.json#",
    "module": "amd",
    "sourceMaps": "inline",
+   "plugins": [ ],
+   "coreLib": "",
+   "verbose": true,
+   "copyExt": false,
+   "extra": {
+      "key": "value"
+   },
+   "watch": true,
+   "msbuild": {
+      "XYX": "123"
+   },
+   "outDir": "",
    "targets": {
-      "not a valid name": {  },
+      "not a valid name": { },
       "GoodName": {
          "sourceMaps": false,
          "declaration": true,
-         "module": "foo"
+         "module": "foo",
+         "symbols": [ "hello", "boo" ],
+         "targets": { } // not allowed here
+         ,
+         "coreLib": "boo",
+         "watch": false,
+         "msbuild": {
+            "XYZ": 456
+         }
       },
       "Another^BadName": { },
       "OK-Name-Wrong-Type": "hello",

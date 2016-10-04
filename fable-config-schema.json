@@ -4,15 +4,23 @@
    "description": "Fable Configuration File Schema",
    "type": "object",
    "properties": {
-      "$schema": { "type": "string" },
-      "projFile": { "$ref": "#/definitions/projfile"},
+      "$schema": { "$ref": "#/definitions/schemaref" },
+      "targets": { "$ref": "#/definitions/targets" },
+      "extra": { "$ref": "#/definitions/extra" },
+      "msbuild": { "$ref": "#/definitions/msbuild" },
+      "outDir": { "$ref": "#/definitions/outdir" },
+      "watch": { "$ref": "#/definitions/watch" },
+      "copyExt": { "$ref": "#/definitions/copyext" },
+      "verbose": { "$ref": "#/definitions/verbose" },
+      "coreLib": { "$ref": "#/definitions/corelib" },
+      "projFile": { "$ref": "#/definitions/projfile" },
       "sourceMaps": { "$ref": "#/definitions/sourcemap" },
+      "symbols": { "$ref": "#/definitions/symbols" },
       "module": { "$ref": "#/definitions/module" },
       "ecma": { "$ref": "#/definitions/ecma" },
       "declaration": { "$ref": "#/definitions/declaration" },
       "plugins": { "$ref": "#/definitions/plugins" },
-      "refs": { "$ref": "#/definitions/refs" },
-      "targets": { "$ref": "#/definitions/targets" }
+      "refs": { "$ref": "#/definitions/refs" }
    },
    "additionalProperties": false,
    "definitions": {
@@ -20,13 +28,18 @@
          "type": "string",
          "description": "Path to fsproj. Relative to fableconfig.json"
       },
+      "corelib": {
+         "type": "string",
+         "description": "In some cases, you may need to pass a different route to the core library, like --coreLib fable-core/es2015",
+         "default": "fable-core/es5"
+      },
       "sourcemap": {
          "description": "Generate sourcemaps: false | true | inline",
          "oneOf": [
             { "type": "boolean" },
             { "enum": [ "inline" ] }
          ],
-         "default":  false
+         "default": false
       },
       "module": {
          "enum": [ "commonjs", "amd", "umd", "es2015" ],
@@ -39,11 +52,14 @@
          "default": "es5"
       },
       "symbols": {
-         "description": "F# symbols for conditional compilation, like DEBUG. FABLE_COMPILER is predefined."
+         "type": "array",
+         "items": { "type": "string" },
+         "description": "F# symbols for conditional compilation, like DEBUG. FABLE__COMPILER is predefined."
       },
       "plugins": {
-         "type": "string",
-         "description": "Path to Fable plugins"
+         "type": "array",
+         "items": { "type": "string" },
+         "description": "Paths to Fable plugins"
       },
       "refs": {
          "type": "object",
@@ -60,13 +76,54 @@
          "description": "[Experimental] Generates corresponding ‘.d.ts’ file",
          "default": false
       },
+      "verbose": {
+         "type": "boolean",
+         "description": "Print more information about the compilation process",
+         "default": false
+      },
+      "copyext": {
+         "type": "boolean",
+         "description": "Copy external files into fable__external folder",
+         "default": true
+      },
+      "watch": {
+         "type": "boolean",
+         "description": "Recompile project much faster on file modifications",
+         "default": false
+      },
+      "outdir": {
+         "type": "string",
+         "description": "Where to put compiled JS files. Defaults to project directory.",
+         "default": ""
+      },
+      "msbuild": {
+         "type": "object",
+         "patternProperties": { "^((\\w|-)+)$": { "type": "string" } },
+         "description": "Pass MSBuild arguments like Configuration : Release"
+      },
+      "extra": {
+         "type": "object",
+         "patternProperties": { "^((\\w|-)+)$": { "type": "string" } },
+         "description": "Custom options for plugins in Key : Value format"
+      },
       "target": {
          "type": "object",
          "properties": {
+            "extra": { "$ref": "#/definitions/extra" },
+            "msbuild": { "$ref": "#/definitions/msbuild" },
+            "outDir": { "$ref": "#/definitions/outdir" },
+            "watch": { "$ref": "#/definitions/watch" },
+            "copyExt": { "$ref": "#/definitions/copyext" },
+            "verbose": { "$ref": "#/definitions/verbose" },
+            "coreLib": { "$ref": "#/definitions/corelib" },
+            "projFile": { "$ref": "#/definitions/projfile" },
             "sourceMaps": { "$ref": "#/definitions/sourcemap" },
+            "symbols": { "$ref": "#/definitions/symbols" },
             "module": { "$ref": "#/definitions/module" },
             "ecma": { "$ref": "#/definitions/ecma" },
-            "declaration": { "$ref": "#/definitions/declaration" }
+            "declaration": { "$ref": "#/definitions/declaration" },
+            "plugins": { "$ref": "#/definitions/plugins" },
+            "refs": { "$ref": "#/definitions/refs" },
          },
          "additionalProperties": false
       },
@@ -75,7 +132,9 @@
          "patternProperties": { "^((\\w|-)+)$": { "$ref": "#/definitions/target" } },
          "description": "Configuration by target. Use --target to select a configuration",
          "additionalProperties": false
+      },
+      "schemaref": {
+         "type": "string"
       }
    }
 }
-
