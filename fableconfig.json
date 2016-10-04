@@ -1,5 +1,19 @@
 ﻿{
-   "$schema": "/fable-config-schema.json#",
+   //"$schema": "/fable-config-schema.json#", // local testing use local schema
+   // or use from published site.
+   // next step: get it added officially to http://json.schemastore.org/fableconfig ?
+   "$schema": "https://raw.githubusercontent.com/michaelsg/fable-config-schema/master/fable-config-schema.json#",
    "module": "amd",
-   "sourceMaps": "inline"
+   "sourceMaps": "inline",
+   "targets": {
+      "not a valid name": {  },
+      "GoodName": {
+         "sourceMaps": false,
+         "declaration": true,
+         "module": "foo"
+      },
+      "Another^BadName": { },
+      "OK-Name-Wrong-Type": "hello",
+      "OK_NAME_2": { }
+   }
 }

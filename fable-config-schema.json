@@ -3,7 +3,6 @@
    "$schema": "http://json-schema.org/draft-04/schema#",
    "description": "Fable Configuration File Schema",
    "type": "object",
-   //"required": [  ],
    "properties": {
       "$schema": { "type": "string" },
       "projFile": { "$ref": "#/definitions/projfile"},
@@ -44,7 +43,7 @@
       },
       "plugins": {
          "type": "string",
-         "description": "Paths to Fable plugins"
+         "description": "Path to Fable plugins"
       },
       "refs": {
          "type": "object",
@@ -63,7 +62,6 @@
       },
       "target": {
          "type": "object",
-         //"required": [  ],
          "properties": {
             "sourceMaps": { "$ref": "#/definitions/sourcemap" },
             "module": { "$ref": "#/definitions/module" },
