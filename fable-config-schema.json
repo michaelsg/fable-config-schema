@@ -123,7 +123,7 @@
             "ecma": { "$ref": "#/definitions/ecma" },
             "declaration": { "$ref": "#/definitions/declaration" },
             "plugins": { "$ref": "#/definitions/plugins" },
-            "refs": { "$ref": "#/definitions/refs" },
+            "refs": { "$ref": "#/definitions/refs" }
          },
          "additionalProperties": false
       },
