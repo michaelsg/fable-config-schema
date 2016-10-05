@@ -20,7 +20,8 @@
       "ecma": { "$ref": "#/definitions/ecma" },
       "declaration": { "$ref": "#/definitions/declaration" },
       "plugins": { "$ref": "#/definitions/plugins" },
-      "refs": { "$ref": "#/definitions/refs" }
+      "refs": { "$ref": "#/definitions/refs" },
+      "scripts": { "$ref": "#/definitions/scripts" }
    },
    "additionalProperties": false,
    "definitions": {
@@ -106,6 +107,25 @@
          "patternProperties": { "^((\\w|-)+)$": { "type": "string" } },
          "description": "Custom options for plugins in Key : Value format"
       },
+      "scripts": {
+         "type": "object",
+         "description": "Commands that should be executed during specific phases of compilation. Currently prebuild, postbuild and postbuild-once are accepted.",
+         "properties": {
+            "postbuild": {
+               "type": "string",
+               "description": "postbuild will run for every compilation in watch mode. If you only want to run the script after the first full compilation, use postbuild-once."
+            },
+            "postbuild-once": {
+               "type": "string",
+               "description": "postbuild-once only runs after the first full compiliation"
+            },
+            "prebuild": {
+               "type": "string",
+               "description": "prebuild will before the first full compilation only"
+            }
+         },
+         "additionalProperties": false
+      },
       "target": {
          "type": "object",
          "properties": {
@@ -123,7 +143,8 @@
             "ecma": { "$ref": "#/definitions/ecma" },
             "declaration": { "$ref": "#/definitions/declaration" },
             "plugins": { "$ref": "#/definitions/plugins" },
-            "refs": { "$ref": "#/definitions/refs" }
+            "refs": { "$ref": "#/definitions/refs" },
+            "scripts": { "$ref": "#/definitions/scripts" }
          },
          "additionalProperties": false
       },

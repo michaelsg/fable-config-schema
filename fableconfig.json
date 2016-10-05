@@ -1,9 +1,10 @@
 ﻿{
-   "$schema": "/fable-config-schema.json#", // local testing use local schema
+   "$schema": "fable-config-schema.json#", // local testing use local schema, doesn't seem to work in vscode'
    // or use from published site.
    // next step: get it added officially to http://json.schemastore.org/fableconfig ?
    //"$schema": "https://raw.githubusercontent.com/michaelsg/fable-config-schema/master/fable-config-schema.json#",
    "module": "amd",
+   "noTypedArray": true,
    "sourceMaps": "inline",
    "plugins": [ ],
    "coreLib": "",
@@ -12,6 +13,7 @@
    "extra": {
       "key": "value"
    },
+   "scripts": {"postbuild": ""},
    "watch": true,
    "msbuild": {
       "XYX": "123"
@@ -30,7 +32,15 @@
          "watch": false,
          "msbuild": {
             "XYZ": 456
+         },
+         "scripts": {
+            "postbuild-once": "npm ls",
+            "postrebuildall": "oops",
+            "prebuild": "xxx",
+            "postbuild": "ddd",
+            "postbuild": "yyy"
          }
+
       },
       "Another^BadName": { },
       "OK-Name-Wrong-Type": "hello",
