@@ -1,5 +1,5 @@
 ﻿{
-   "id": "http://some.site.somewhere/entry-schema#",
+   "id": "http://json-schema.org/fableconfig#",
    "$schema": "http://json-schema.org/draft-04/schema#",
    "description": "Fable Configuration File Schema",
    "type": "object",
